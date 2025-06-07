@@ -1,6 +1,7 @@
 # 7-Day Nutrition Report
 
 A Shortcut to generate a 7-day nutrition and activity report.
+Latest version of shortcut you can find in **Releases**
 
 ## 🌟 Features
 
@@ -35,3 +36,13 @@ The script generates a `nutrition_report.csv` file with the following columns:
 | `calories` | Total calories consumed.                  | Integer     |
 
 ---
+
+## 📝 Future Enhancements
+
+- Add activity energy expenditure tracking
+  - Research and implement deduplication strategy for multiple data sources
+  - Calculate calories burned from workouts and daily activities
+- Add cloud data integration
+  - Enable export to Google Sheets for data analysis
+  - Add option to backup data to S3 or similar cloud storage
+  - Build foundation for future data analytics capabilities
