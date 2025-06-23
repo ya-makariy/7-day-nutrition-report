@@ -1,0 +1,12 @@
+"Health Stats" = "Статистика здоровья";
+"Start Date" = "Дата начала";
+"End Date" = "Дата окончания";
+"Fetch Data" = "Получить данные";
+"Export CSV" = "Экспортировать CSV";
+"Steps" = "Шаги";
+"Active Energy" = "Активная энергия";
+"Carbs" = "Углеводы";
+"Proteins" = "Белки";
+"Fats" = "Жиры";
+"Calories" = "Калории";
+"Failed to export CSV:" = "Не удалось экспортировать CSV:"; 
