@@ -15,17 +15,17 @@ jobs:
         with:
           xcode-version: latest
       - name: Build app
-        run: xcodebuild -scheme 7DayNutritionReportApp -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+        run: xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Archive app
         run: |
-          xcodebuild -scheme 7DayNutritionReportApp -sdk iphoneos -configuration Release archive -archivePath ${{github.workspace}}/build/7DayNutritionReportApp.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release archive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Export .ipa
         run: |
-          xcodebuild -exportArchive -archivePath ${{github.workspace}}/build/7DayNutritionReportApp.xcarchive -exportPath ${{github.workspace}}/build -exportOptionsPlist ExportOptions.plist
+          xcodebuild -exportArchive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive -exportPath ${{github.workspace}}/build -exportOptionsPlist ExportOptions.plist
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: 7DayNutritionReportApp
+          name: SevenDayNutritionReportApp
           path: build/*.ipa
 
   release:
@@ -36,7 +36,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: 7DayNutritionReportApp
+          name: SevenDayNutritionReportApp
           path: build
       - name: Generate changelog
         id: changelog

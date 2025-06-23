@@ -1,0 +1,440 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2174E67808F687653C0D4A34 /* 7DayNutritionReportApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92888C5A65A8D193B18900E /* 7DayNutritionReportApp.swift */; };
+		29BF69901A4EFBA7A80E9E95 /* HealthDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111C96E4CDC5C6EBF18290C9 /* HealthDataManager.swift */; };
+		7E29F8C97F6C49AD3C97B29D /* HealthDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D643936C7B64D8877116C9C2 /* HealthDataViewModel.swift */; };
+		D20D12379FA5485E4030D71E /* HealthDataViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF42550BBE486A6D739571C /* HealthDataViewModelTests.swift */; };
+		DC88482C1B818A363702ADC9 /* ShareSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2568BC4E0045FDA7516CFD8 /* ShareSheet.swift */; };
+		F0DF52F80716E6C9526DA462 /* HealthDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DF7AA3FEEEE7D800E9DEB8 /* HealthDataView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		55413B307646E0C433FD198A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7965F57A9D1B576B97F4AC4B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D93F5DB23B792BE32B035242;
+			remoteInfo = SevenDayNutritionReportApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		111C96E4CDC5C6EBF18290C9 /* HealthDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataManager.swift; sourceTree = "<group>"; };
+		7AF42550BBE486A6D739571C /* HealthDataViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataViewModelTests.swift; sourceTree = "<group>"; };
+		A65796CD8726BC49C7DF2AB4 /* SevenDayNutritionReportAppTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SevenDayNutritionReportAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5DF7AA3FEEEE7D800E9DEB8 /* HealthDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataView.swift; sourceTree = "<group>"; };
+		D643936C7B64D8877116C9C2 /* HealthDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthDataViewModel.swift; sourceTree = "<group>"; };
+		EF0434403449F8B82E800E13 /* SevenDayNutritionReportApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SevenDayNutritionReportApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2568BC4E0045FDA7516CFD8 /* ShareSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheet.swift; sourceTree = "<group>"; };
+		F92888C5A65A8D193B18900E /* 7DayNutritionReportApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = 7DayNutritionReportApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0C43DEE1172DAA60F5F0CAF2 /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				111C96E4CDC5C6EBF18290C9 /* HealthDataManager.swift */,
+			);
+			path = Health;
+			sourceTree = "<group>";
+		};
+		0C4B7F0732C2D865908E9DC7 /* ShareSheet */ = {
+			isa = PBXGroup;
+			children = (
+				F2568BC4E0045FDA7516CFD8 /* ShareSheet.swift */,
+			);
+			path = ShareSheet;
+			sourceTree = "<group>";
+		};
+		1F6FBA7C18E20B86F2312B31 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0C4B7F0732C2D865908E9DC7 /* ShareSheet */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		36B8A6D2C927D61C3D1B7FFC /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0C43DEE1172DAA60F5F0CAF2 /* Health */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		5186538838FE12776AD8932A = {
+			isa = PBXGroup;
+			children = (
+				F92888C5A65A8D193B18900E /* 7DayNutritionReportApp.swift */,
+				36B8A6D2C927D61C3D1B7FFC /* Core */,
+				C9E425F0889DB49995024B3D /* Features */,
+				D552A8190F43D51F20F00A66 /* Tests */,
+				1F6FBA7C18E20B86F2312B31 /* UI */,
+				A208DA6F9B569257A4C309B7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A208DA6F9B569257A4C309B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF0434403449F8B82E800E13 /* SevenDayNutritionReportApp.app */,
+				A65796CD8726BC49C7DF2AB4 /* SevenDayNutritionReportAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C9E425F0889DB49995024B3D /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				FE36C736969FF914F24E3FB9 /* Health */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D552A8190F43D51F20F00A66 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7AF42550BBE486A6D739571C /* HealthDataViewModelTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		FE36C736969FF914F24E3FB9 /* Health */ = {
+			isa = PBXGroup;
+			children = (
+				D5DF7AA3FEEEE7D800E9DEB8 /* HealthDataView.swift */,
+				D643936C7B64D8877116C9C2 /* HealthDataViewModel.swift */,
+			);
+			path = Health;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0C7182ABDE0687E69B80C298 /* SevenDayNutritionReportAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 73F67CE68D6E0D32A3DA8E71 /* Build configuration list for PBXNativeTarget "SevenDayNutritionReportAppTests" */;
+			buildPhases = (
+				F955FC059982F5D8D1BD14C4 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				13A07AF5BCE1B33ABBBC9DB5 /* PBXTargetDependency */,
+			);
+			name = SevenDayNutritionReportAppTests;
+			packageProductDependencies = (
+			);
+			productName = SevenDayNutritionReportAppTests;
+			productReference = A65796CD8726BC49C7DF2AB4 /* SevenDayNutritionReportAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D93F5DB23B792BE32B035242 /* SevenDayNutritionReportApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F49A92F9DE6A2E4E8663974 /* Build configuration list for PBXNativeTarget "SevenDayNutritionReportApp" */;
+			buildPhases = (
+				C001B0D56FD334086EFB65E8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SevenDayNutritionReportApp;
+			packageProductDependencies = (
+			);
+			productName = SevenDayNutritionReportApp;
+			productReference = EF0434403449F8B82E800E13 /* SevenDayNutritionReportApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7965F57A9D1B576B97F4AC4B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 57BA1D4ACA70A936292E41CF /* Build configuration list for PBXProject "SevenDayNutritionReportApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 5186538838FE12776AD8932A;
+			minimizedProjectReferenceProxies = 1;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D93F5DB23B792BE32B035242 /* SevenDayNutritionReportApp */,
+				0C7182ABDE0687E69B80C298 /* SevenDayNutritionReportAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C001B0D56FD334086EFB65E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2174E67808F687653C0D4A34 /* 7DayNutritionReportApp.swift in Sources */,
+				29BF69901A4EFBA7A80E9E95 /* HealthDataManager.swift in Sources */,
+				F0DF52F80716E6C9526DA462 /* HealthDataView.swift in Sources */,
+				7E29F8C97F6C49AD3C97B29D /* HealthDataViewModel.swift in Sources */,
+				DC88482C1B818A363702ADC9 /* ShareSheet.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F955FC059982F5D8D1BD14C4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D20D12379FA5485E4030D71E /* HealthDataViewModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		13A07AF5BCE1B33ABBBC9DB5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D93F5DB23B792BE32B035242 /* SevenDayNutritionReportApp */;
+			targetProxy = 55413B307646E0C433FD198A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		24375B8D58DD3C3ACBB33AA8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SevenDayNutritionReportApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = L4WWQ74R8K;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SevenDayNutritionReportApp;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		3D0D9D9997593D82A1C02823 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SevenDayNutritionReportAppTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SevenDayNutritionReportApp.app/SevenDayNutritionReportApp";
+			};
+			name = Debug;
+		};
+		59DFE3FDF3B0D302EEA11137 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AEBA13001C2EBD98FB2D97C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SevenDayNutritionReportApp.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = L4WWQ74R8K;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SevenDayNutritionReportApp;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D92D5B1C17A097E12A07945D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E10A0599F85D210CFE769BAE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.SevenDayNutritionReportAppTests;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SevenDayNutritionReportApp.app/SevenDayNutritionReportApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		57BA1D4ACA70A936292E41CF /* Build configuration list for PBXProject "SevenDayNutritionReportApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				59DFE3FDF3B0D302EEA11137 /* Debug */,
+				D92D5B1C17A097E12A07945D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6F49A92F9DE6A2E4E8663974 /* Build configuration list for PBXNativeTarget "SevenDayNutritionReportApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AEBA13001C2EBD98FB2D97C3 /* Debug */,
+				24375B8D58DD3C3ACBB33AA8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		73F67CE68D6E0D32A3DA8E71 /* Build configuration list for PBXNativeTarget "SevenDayNutritionReportAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D0D9D9997593D82A1C02823 /* Debug */,
+				E10A0599F85D210CFE769BAE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7965F57A9D1B576B97F4AC4B /* Project object */;
+}

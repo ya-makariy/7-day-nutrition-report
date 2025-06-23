@@ -1,5 +1,5 @@
 import XCTest
-@testable import 7DayNutritionReportApp
+@testable import SevenDayNutritionReportApp
 
 final class HealthDataViewModelTests: XCTestCase {
     func testExportCSV_GeneratesCorrectCSV() {

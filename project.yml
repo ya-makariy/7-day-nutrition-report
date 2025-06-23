@@ -1,0 +1,60 @@
+name: SevenDayNutritionReportApp
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "16.0"
+
+targets:
+  SevenDayNutritionReportApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: 7DayNutritionReportApp.swift
+      - path: Core
+      - path: Features
+      - path: UI
+    resources:
+      - path: Resources
+    settings:
+      base:
+        INFOPLIST_FILE: Info.plist
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.SevenDayNutritionReportApp
+    info:
+      path: Info.plist
+      properties:
+        CFBundleDisplayName: "7-Day Nutrition Report"
+        NSHealthShareUsageDescription: "This app needs access to read your health data to generate reports"
+        NSHealthUpdateUsageDescription: "This app needs access to read your health data to generate reports"
+    entitlements:
+      path: SevenDayNutritionReportApp.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+
+  SevenDayNutritionReportAppTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "16.0"
+    sources:
+      - path: Tests
+    dependencies:
+      - target: SevenDayNutritionReportApp
+
+schemes:
+  SevenDayNutritionReportApp:
+    build:
+      targets:
+        SevenDayNutritionReportApp: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - SevenDayNutritionReportAppTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release 

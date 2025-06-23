@@ -18,4 +18,4 @@ jobs:
         with:
           xcode-version: latest
       - name: Run tests
-        run: xcodebuild test -scheme 7DayNutritionReportApp -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' 
+        run: xcodebuild test -scheme SevenDayNutritionReportApp -destination 'platform=iOS Simulator,name=iPhone 14,OS=latest' 

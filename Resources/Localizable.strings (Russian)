@@ -9,4 +9,12 @@
 "Proteins" = "Белки";
 "Fats" = "Жиры";
 "Calories" = "Калории";
-"Failed to export CSV:" = "Не удалось экспортировать CSV:"; 
+"Failed to export CSV:" = "Не удалось экспортировать CSV:";
+"Date Range" = "Диапазон дат";
+"Loading..." = "Загрузка...";
+"Health Data" = "Данные здоровья";
+"No Data Available" = "Данные недоступны";
+"Select a date range and tap 'Fetch Data' to get started." = "Выберите диапазон дат и нажмите 'Получить данные' для начала.";
+"Daily Data" = "Данные по дням";
+"Charts" = "Графики";
+"Not enough data for chart" = "Недостаточно данных для графика"; 

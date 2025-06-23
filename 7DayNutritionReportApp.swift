@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct 7DayNutritionReportApp: App {
+struct SevenDayNutritionReportApp: App {
     var body: some Scene {
         WindowGroup {
             HealthDataView()

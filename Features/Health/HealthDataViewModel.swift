@@ -7,6 +7,7 @@ final class HealthDataViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
     @Published var csvURL: URL?
+    @Published var noDataErrorShouldHide: Bool = false
     
     private let manager = HealthDataManager()
     

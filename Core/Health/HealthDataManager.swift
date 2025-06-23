@@ -33,7 +33,7 @@ struct HealthDataManager {
             HKObjectType.quantityType(forIdentifier: .dietaryFatTotal)!,
             HKObjectType.quantityType(forIdentifier: .dietaryEnergyConsumed)!
         ]
-        try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             healthStore.requestAuthorization(toShare: [], read: types) { success, error in
                 if let error = error {
                     continuation.resume(throwing: error)
@@ -69,7 +69,7 @@ struct HealthDataManager {
     private func fetchSum(_ identifier: HKQuantityTypeIdentifier, unit: HKUnit, start: Date, end: Date) async throws -> Double {
         guard let type = HKObjectType.quantityType(forIdentifier: identifier) else { return 0 }
         let predicate = HKQuery.predicateForSamples(withStart: start, end: end, options: .strictStartDate)
-        return try await withCheckedThrowingContinuation { continuation in
+        return try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Double, Error>) in
             let query = HKStatisticsQuery(quantityType: type, quantitySamplePredicate: predicate, options: .cumulativeSum) { _, stats, error in
                 if let error = error {
                     continuation.resume(throwing: error)
