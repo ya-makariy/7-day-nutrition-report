@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
@@ -23,7 +23,7 @@ jobs:
         run: |
           xcodebuild -exportArchive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive -exportPath ${{github.workspace}}/build -exportOptionsPlist ExportOptions.plist
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: SevenDayNutritionReportApp
           path: build/*.ipa
@@ -32,9 +32,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: SevenDayNutritionReportApp
           path: build
