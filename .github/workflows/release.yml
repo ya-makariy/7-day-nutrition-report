@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+      - name: Build app
+        run: xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - name: Archive app
+        run: |
+          xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release archive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+      - name: Export .ipa
+        run: |
+          xcodebuild -exportArchive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive -exportPath ${{github.workspace}}/build -exportOptionsPlist ExportOptions.plist
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: SevenDayNutritionReportApp
+          path: build/*.ipa
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: SevenDayNutritionReportApp
+          path: build
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git tag --sort=-creatordate | sed -n 2p)
+          if [ -z "$PREV_TAG" ]; then PREV_TAG=$(git rev-list --max-parents=0 HEAD); fi
+          echo "Previous tag: $PREV_TAG"
+          echo "## Changelog" > changelog.md
+          git log $PREV_TAG..HEAD --pretty=format:'- %s' >> changelog.md
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          body_path: changelog.md
+          files: build/*.ipa 

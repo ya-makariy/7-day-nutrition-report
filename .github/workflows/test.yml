@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest
+      - name: Run tests
+        run: xcodebuild test -scheme SevenDayNutritionReportApp -destination 'platform=iOS Simulator,name=iPhone 15 Pro,OS=17.5' 

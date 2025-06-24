@@ -1,7 +1,27 @@
 # 7-Day Nutrition Report
 
-A Shortcut to generate a 7-day nutrition and activity report.
-Latest version of shortcut you can find in **Releases**
+This iOS app collects deduplicated daily statistics from Apple Health for steps, active energy, carbs, proteins, fats, and calories over a user-selected date range, and exports the data as a CSV file for sharing.
+
+## Features
+- Fetches daily health and nutrition data from Apple Health
+- Exports data as CSV for each day in the selected range
+- Share the CSV file via the system share sheet
+- SwiftUI interface, supports dark mode and dynamic type
+
+## Requirements
+- Xcode 15+
+- iOS 17.0+
+- Apple Health permissions (requested on first launch)
+
+## Setup & Run
+See [INSTALL.md](INSTALL.md) for build and run instructions.
+
+## Build Artifacts (CI)
+- On every tag push, GitHub Actions will build and export an `.ipa` artifact.
+
+## Notes
+- All data is read-only from Apple Health and never leaves your device unless you share the CSV.
+- For any issues, please open a GitHub issue.
 
 ## 🌟 Features
 
