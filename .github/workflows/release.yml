@@ -18,7 +18,7 @@ jobs:
         run: xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
       - name: Archive app
         run: |
-          xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release archive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild -scheme SevenDayNutritionReportApp -sdk iphoneos -configuration Release archive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO DEVELOPMENT_TEAM=L4WWQ74R8K
       - name: Export .ipa
         run: |
           xcodebuild -exportArchive -archivePath ${{github.workspace}}/build/SevenDayNutritionReportApp.xcarchive -exportPath ${{github.workspace}}/build -exportOptionsPlist ExportOptions.plist
