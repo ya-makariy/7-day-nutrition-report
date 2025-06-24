@@ -1,6 +1,7 @@
 import XCTest
 @testable import SevenDayNutritionReportApp
 
+@MainActor
 final class HealthDataViewModelTests: XCTestCase {
     func testExportCSV_GeneratesCorrectCSV() {
         let viewModel = HealthDataViewModel()
