@@ -2,13 +2,13 @@ name: SevenDayNutritionReportApp
 options:
   bundleIdPrefix: com.example
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "17.0"
 
 targets:
   SevenDayNutritionReportApp:
     type: application
     platform: iOS
-    deploymentTarget: "16.0"
+    deploymentTarget: "17.0"
     sources:
       - path: 7DayNutritionReportApp.swift
       - path: Core
@@ -35,7 +35,7 @@ targets:
   SevenDayNutritionReportAppTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "16.0"
+    deploymentTarget: "17.0"
     sources:
       - path: Tests
     dependencies:

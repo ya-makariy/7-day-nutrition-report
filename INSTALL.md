@@ -1,5 +1,10 @@
 # Installation & Run Guide
 
+## Requirements
+- iOS 17.0 or later
+- Xcode 15 or newer
+- iPhone or iPad (HealthKit requires a real device, not simulator)
+
 ## 1. Clone the repository
 ```
 git clone https://github.com/yourusername/7-day-nutrition-report.git

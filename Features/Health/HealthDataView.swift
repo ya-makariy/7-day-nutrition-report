@@ -15,231 +15,257 @@ struct HealthDataView: View {
     @State private var showEndDatePicker = false
     
     var body: some View {
-        NavigationStack {
+        ZStack {
+            // Полноэкранный фон
+            Color(.systemBackground)
+                .ignoresSafeArea(.all)
+            
             VStack(spacing: 0) {
-                // Верхняя часть - прокручиваемый контент
+                // Заголовок с минимальным отступом от статус-бара
+                Text("Health Stats".localized)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .padding(.bottom, 12)
+                    .background(Color(.systemBackground))
+                    
+                // Основной контент занимает всё доступное пространство
                 ScrollView {
-                    VStack(spacing: 16) {
-                        // Date Selection Section
-                        VStack(alignment: .leading, spacing: 16) {
+                    VStack(spacing: 24) {
+                        // Выбор дат
+                        VStack(alignment: .leading, spacing: 18) {
                             Text("Date Range".localized)
-                                .font(.headline)
+                                .font(.title2)
+                                .fontWeight(.semibold)
                                 .foregroundColor(.primary)
                             
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
+                            HStack(spacing: 16) {
+                                // Start Date
+                                VStack(alignment: .leading, spacing: 6) {
                                     Text("Start Date".localized)
-                                        .font(.caption)
+                                        .font(.subheadline)
                                         .foregroundColor(.secondary)
                                     Button(action: { showStartDatePicker = true }) {
                                         Text(dateString(startDate))
                                             .font(.body)
                                             .foregroundColor(.primary)
                                             .frame(maxWidth: .infinity)
-                                            .padding(8)
+                                            .padding(16)
                                             .background(Color(.systemGray5))
-                                            .cornerRadius(8)
+                                            .cornerRadius(12)
                                     }
                                 }
-                                Spacer()
-                                VStack(alignment: .trailing, spacing: 4) {
+                                
+                                // End Date
+                                VStack(alignment: .leading, spacing: 6) {
                                     Text("End Date".localized)
-                                        .font(.caption)
+                                        .font(.subheadline)
                                         .foregroundColor(.secondary)
                                     Button(action: { showEndDatePicker = true }) {
                                         Text(dateString(endDate))
                                             .font(.body)
                                             .foregroundColor(.primary)
                                             .frame(maxWidth: .infinity)
-                                            .padding(8)
+                                            .padding(16)
                                             .background(Color(.systemGray5))
-                                            .cornerRadius(8)
+                                            .cornerRadius(12)
                                     }
                                 }
                             }
-                            .padding()
-                            .background(Color(.systemGray6))
-                            .cornerRadius(12)
                         }
-                        .padding(.horizontal)
-                        
-                        // Fetch Data Button
+                        .padding(.horizontal, 20)
+                            
+                        // Кнопка Fetch Data
                         Button(action: {
                             Task { await viewModel.fetchData(startDate: startDate, endDate: endDate) }
                         }) {
-                            HStack {
+                            HStack(spacing: 12) {
                                 if viewModel.isLoading {
                                     ProgressView()
-                                        .scaleEffect(0.8)
+                                        .scaleEffect(1.0)
                                         .tint(.white)
                                 } else {
                                     Image(systemName: "arrow.down.circle.fill")
                                         .font(.title2)
                                 }
                                 Text(viewModel.isLoading ? "Loading...".localized : "Fetch Data".localized)
-                                    .font(.headline)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
                             }
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
-                            .padding()
+                            .padding(20)
                             .background(viewModel.isLoading ? Color.gray : Color.blue)
-                            .cornerRadius(12)
+                            .cornerRadius(16)
                         }
                         .disabled(viewModel.isLoading)
-                        .padding(.horizontal)
-                        
-                        // Error Display
+                        .padding(.horizontal, 20)
+                            
+                        // Ошибки
                         if let error = viewModel.error, !viewModel.noDataErrorShouldHide {
-                            HStack {
+                            HStack(spacing: 12) {
                                 Image(systemName: "exclamationmark.triangle.fill")
                                     .foregroundColor(.orange)
+                                    .font(.title3)
                                 Text(error)
-                                    .font(.caption)
+                                    .font(.body)
                                     .foregroundColor(.secondary)
                                 Spacer()
                             }
-                            .padding()
+                            .padding(20)
                             .background(Color(.systemGray6))
-                            .cornerRadius(12)
-                            .padding(.horizontal)
+                            .cornerRadius(16)
+                            .padding(.horizontal, 20)
                         }
-                        
-                        // Content based on selected tab
+                            
+                        // Контент на основе выбранной вкладки
                         if !viewModel.dailyData.isEmpty {
                             if selectedTab == 0 {
-                                // Daily Data Content
                                 DailyDataContent(data: viewModel.dailyData, onExport: {
                                     viewModel.exportCSV()
                                 })
                             } else {
-                                // Charts Content
                                 ChartsContent(data: viewModel.dailyData)
                             }
                         } else if !viewModel.isLoading && viewModel.error == nil {
-                            // Empty State
-                            VStack(spacing: 16) {
+                            // Пустое состояние
+                            VStack(spacing: 20) {
                                 Image(systemName: "heart.text.square")
-                                    .font(.system(size: 60))
+                                    .font(.system(size: 80))
                                     .foregroundColor(.gray)
                                 Text("No Data Available".localized)
-                                    .font(.headline)
+                                    .font(.title2)
+                                    .fontWeight(.semibold)
                                     .foregroundColor(.secondary)
                                 Text("Select a date range and tap 'Fetch Data' to get started.".localized)
-                                    .font(.caption)
+                                    .font(.body)
                                     .foregroundColor(.secondary)
                                     .multilineTextAlignment(.center)
                             }
-                            .padding(.vertical, 40)
+                            .padding(.vertical, 60)
                         }
                         
-                        Spacer(minLength: 120)
+                        // Отступ для нижних вкладок
+                        if !viewModel.dailyData.isEmpty {
+                            Spacer().frame(height: 100)
+                        }
                     }
                 }
-                
+                    
+                // Нижние вкладки
                 if !viewModel.dailyData.isEmpty {
-                    Divider()
-                    HStack {
-                        Button(action: { selectedTab = 0 }) {
-                            VStack(spacing: 4) {
-                                Image(systemName: "calendar")
-                                    .font(.title2)
-                                Text("Daily Data".localized)
-                                    .font(.caption)
+                    VStack(spacing: 0) {
+                        Divider()
+                            .background(Color(.separator))
+                        HStack(spacing: 0) {
+                            // Daily Data Tab
+                            Button(action: { selectedTab = 0 }) {
+                                VStack(spacing: 6) {
+                                    Image(systemName: "calendar")
+                                        .font(.title2)
+                                    Text("Daily Data".localized)
+                                        .font(.footnote)
+                                        .fontWeight(.medium)
+                                }
+                                .foregroundColor(selectedTab == 0 ? .blue : .secondary)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
                             }
-                            .foregroundColor(selectedTab == 0 ? .blue : .secondary)
-                            .frame(maxWidth: .infinity)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                        
-                        Button(action: { selectedTab = 1 }) {
-                            VStack(spacing: 4) {
-                                Image(systemName: "chart.line.uptrend.xyaxis")
-                                    .font(.title2)
-                                Text("Charts".localized)
-                                    .font(.caption)
+                            .buttonStyle(PlainButtonStyle())
+                            
+                            // Charts Tab
+                            Button(action: { selectedTab = 1 }) {
+                                VStack(spacing: 6) {
+                                    Image(systemName: "chart.line.uptrend.xyaxis")
+                                        .font(.title2)
+                                    Text("Charts".localized)
+                                        .font(.footnote)
+                                        .fontWeight(.medium)
+                                }
+                                .foregroundColor(selectedTab == 1 ? .blue : .secondary)
+                                .frame(maxWidth: .infinity)
+                                .padding(.vertical, 16)
                             }
-                            .foregroundColor(selectedTab == 1 ? .blue : .secondary)
-                            .frame(maxWidth: .infinity)
+                            .buttonStyle(PlainButtonStyle())
                         }
-                        .buttonStyle(PlainButtonStyle())
+                        .background(Color(.systemBackground))
                     }
-                    .padding(.vertical, 12)
-                    .background(Color(.systemBackground))
                 }
             }
-            .ignoresSafeArea(.container, edges: .bottom)
-            .navigationTitle("Health Stats".localized)
-            .navigationBarTitleDisplayMode(.large)
-            .onAppear {
-                Task { await viewModel.requestAuthorization() }
+        }
+        .onAppear {
+            Task { await viewModel.requestAuthorization() }
+        }
+        .sheet(isPresented: $showShareSheet) {
+            if let url = viewModel.csvURL {
+                ShareSheet(activityItems: [url])
+                    .presentationDetents([.medium, .large])
+                    .presentationDragIndicator(.visible)
             }
-            .sheet(isPresented: $showShareSheet) {
-                if let url = viewModel.csvURL {
-                    ShareSheet(activityItems: [url])
-                }
+        }
+        .sheet(isPresented: $showStartDatePicker) {
+            DatePicker(
+                "",
+                selection: Binding(
+                    get: { startDate },
+                    set: { newValue in
+                        startDate = newValue
+                        if endDate < newValue { endDate = newValue }
+                        viewModel.error = nil
+                        viewModel.noDataErrorShouldHide = true
+                        showStartDatePicker = false
+                    }
+                ),
+                in: ...Date(),
+                displayedComponents: .date
+            )
+            .datePickerStyle(.graphical)
+            .labelsHidden()
+            .presentationDetents([.medium])
+            .padding()
+        }
+        .sheet(isPresented: $showEndDatePicker) {
+            DatePicker(
+                "",
+                selection: Binding(
+                    get: { endDate },
+                    set: { newValue in
+                        endDate = newValue
+                        if startDate > newValue { startDate = newValue }
+                        viewModel.error = nil
+                        viewModel.noDataErrorShouldHide = true
+                        showEndDatePicker = false
+                    }
+                ),
+                in: ...Date(),
+                displayedComponents: .date
+            )
+            .datePickerStyle(.graphical)
+            .labelsHidden()
+            .presentationDetents([.medium])
+            .padding()
+        }
+        .onChange(of: startDate) { _ in
+            viewModel.error = nil
+            viewModel.noDataErrorShouldHide = true
+        }
+        .onChange(of: endDate) { _ in
+            viewModel.error = nil
+            viewModel.noDataErrorShouldHide = true
+        }
+        .onChange(of: viewModel.isLoading) { isLoading in
+            if isLoading {
+                viewModel.noDataErrorShouldHide = false
             }
-            .sheet(isPresented: $showStartDatePicker) {
-                DatePicker(
-                    "",
-                    selection: Binding(
-                        get: { startDate },
-                        set: { newValue in
-                            startDate = newValue
-                            if endDate < newValue { endDate = newValue }
-                            viewModel.error = nil
-                            viewModel.noDataErrorShouldHide = true
-                            showStartDatePicker = false
-                        }
-                    ),
-                    in: ...Date(),
-                    displayedComponents: .date
-                )
-                .datePickerStyle(.graphical)
-                .labelsHidden()
-                .presentationDetents([.medium])
-                .padding()
-            }
-            .sheet(isPresented: $showEndDatePicker) {
-                DatePicker(
-                    "",
-                    selection: Binding(
-                        get: { endDate },
-                        set: { newValue in
-                            endDate = newValue
-                            if startDate > newValue { startDate = newValue }
-                            viewModel.error = nil
-                            viewModel.noDataErrorShouldHide = true
-                            showEndDatePicker = false
-                        }
-                    ),
-                    in: ...Date(),
-                    displayedComponents: .date
-                )
-                .datePickerStyle(.graphical)
-                .labelsHidden()
-                .presentationDetents([.medium])
-                .padding()
-            }
-            .onChange(of: startDate) { _ in
-                viewModel.error = nil
-                viewModel.noDataErrorShouldHide = true
-            }
-            .onChange(of: endDate) { _ in
-                viewModel.error = nil
-                viewModel.noDataErrorShouldHide = true
-            }
-            .onChange(of: viewModel.isLoading) { isLoading in
-                if isLoading {
-                    viewModel.noDataErrorShouldHide = false
-                }
-            }
-            .onChange(of: selectedTab) { _ in
-                viewModel.error = nil
-                viewModel.noDataErrorShouldHide = true
-            }
-            .onChange(of: viewModel.csvURL) { _ in
-                showShareSheet = viewModel.csvURL != nil
-            }
+        }
+        .onChange(of: selectedTab) { _ in
+            viewModel.error = nil
+            viewModel.noDataErrorShouldHide = true
+        }
+        .onChange(of: viewModel.csvURL) { _ in
+            showShareSheet = viewModel.csvURL != nil
         }
     }
     
@@ -249,29 +275,34 @@ struct HealthDataView: View {
         return formatter.string(from: date)
     }
 }
- 
+
 struct DailyDataContent: View {
     let data: [HealthDataManager.DailyHealthData]
     let onExport: () -> Void
     @State private var selectedDayIndex: Int = 0
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             // Header with Export Button
             HStack {
                 Text("Daily Data".localized)
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.semibold)
                     .foregroundColor(.primary)
                 Spacer()
-                Button("Export CSV".localized) {
-                    onExport()
+                Button(action: onExport) {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.title2)
+                        .foregroundColor(.white)
                 }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.small)
+                .frame(width: 50, height: 50)
+                .background(Color.blue)
+                .clipShape(Circle())
+                .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
             }
-            .padding(.horizontal)
+            .padding(.horizontal, 20)
             
-            // Smart page control для дней (максимум 7 точек)
+            // Smart page control (максимум 7 точек)
             if data.count > 1 {
                 SmartPageControl(
                     currentIndex: selectedDayIndex,
@@ -281,21 +312,19 @@ struct DailyDataContent: View {
                         selectedDayIndex = newIndex
                     }
                 )
-                .padding(.horizontal)
+                .padding(.horizontal, 20)
             }
             
-            // Горизонтальный скролл по дням (без заголовка даты)
+            // Горизонтальный скролл по дням
             TabView(selection: $selectedDayIndex) {
                 ForEach(Array(data.enumerated()), id: \.offset) { index, dailyData in
-                    VStack(spacing: 16) {
-                        DailyDataCard(data: dailyData)
-                    }
-                    .padding(.horizontal)
-                    .tag(index)
+                    DailyDataCard(data: dailyData)
+                        .padding(.horizontal, 20)
+                        .tag(index)
                 }
             }
             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .frame(height: 380)
+            .frame(height: 480)
         }
     }
 }
@@ -345,13 +374,13 @@ struct ChartsContent: View {
     let data: [HealthDataManager.DailyHealthData]
     
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 24) {
             // Steps Chart
             ChartCard(
                 title: "Steps".localized,
                 data: data.map { ChartData(date: $0.date, value: $0.steps) },
                 color: .green,
-                icon: "figure.walk"
+                emoji: "🚶"
             )
             
             // Active Energy Chart
@@ -359,7 +388,7 @@ struct ChartsContent: View {
                 title: "Active Energy".localized,
                 data: data.map { ChartData(date: $0.date, value: $0.activeEnergy) },
                 color: .orange,
-                icon: "flame.fill"
+                emoji: "🔥"
             )
             
             // Carbs Chart
@@ -367,7 +396,7 @@ struct ChartsContent: View {
                 title: "Carbs".localized,
                 data: data.map { ChartData(date: $0.date, value: $0.carbs) },
                 color: .green,
-                icon: "leaf.fill"
+                emoji: "🍩"
             )
             
             // Proteins Chart
@@ -375,7 +404,7 @@ struct ChartsContent: View {
                 title: "Proteins".localized,
                 data: data.map { ChartData(date: $0.date, value: $0.proteins) },
                 color: .blue,
-                icon: "drop.fill"
+                emoji: "🍗"
             )
             
             // Fats Chart
@@ -383,7 +412,7 @@ struct ChartsContent: View {
                 title: "Fats".localized,
                 data: data.map { ChartData(date: $0.date, value: $0.fats) },
                 color: .yellow,
-                icon: "circle.fill"
+                emoji: "🧈"
             )
             
             // Calories Chart
@@ -391,122 +420,10 @@ struct ChartsContent: View {
                 title: "Calories".localized,
                 data: data.map { ChartData(date: $0.date, value: $0.calories) },
                 color: .red,
-                icon: "bolt.fill"
+                emoji: "🍽️"
             )
         }
-        .padding()
-    }
-}
-
-struct DailyDataTabView: View {
-    let data: [HealthDataManager.DailyHealthData]
-    let onExport: () -> Void
-    @State private var selectedDayIndex: Int = 0
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            // Header with Export Button
-            HStack {
-                Text("Daily Data".localized)
-                    .font(.headline)
-                    .foregroundColor(.primary)
-                Spacer()
-                Button("Export CSV".localized) {
-                    onExport()
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.small)
-            }
-            .padding(.horizontal)
-            .padding(.vertical, 8)
-            
-            // Горизонтальный TabView по дням
-            if !data.isEmpty {
-                TabView(selection: $selectedDayIndex) {
-                    ForEach(Array(data.enumerated()), id: \.offset) { index, dailyData in
-                        ScrollView {
-                            VStack(spacing: 16) {
-                                Text(dailyData.date, style: .date)
-                                    .font(.title2)
-                                    .bold()
-                                    .padding(.top)
-                                DailyDataCard(data: dailyData)
-                                Spacer(minLength: 100)
-                            }
-                            .padding(.horizontal)
-                        }
-                        .tag(index)
-                    }
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
-            } else {
-                Text("No daily data available".localized)
-                    .foregroundColor(.secondary)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-        }
-    }
-}
-
-struct ChartsTabView: View {
-    let data: [HealthDataManager.DailyHealthData]
-    
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                // Steps Chart
-                ChartCard(
-                    title: "Steps".localized,
-                    data: data.map { ChartData(date: $0.date, value: $0.steps) },
-                    color: .green,
-                    icon: "figure.walk"
-                )
-                
-                // Active Energy Chart
-                ChartCard(
-                    title: "Active Energy".localized,
-                    data: data.map { ChartData(date: $0.date, value: $0.activeEnergy) },
-                    color: .orange,
-                    icon: "flame.fill"
-                )
-                
-                // Carbs Chart
-                ChartCard(
-                    title: "Carbs".localized,
-                    data: data.map { ChartData(date: $0.date, value: $0.carbs) },
-                    color: .green,
-                    icon: "leaf.fill"
-                )
-                
-                // Proteins Chart
-                ChartCard(
-                    title: "Proteins".localized,
-                    data: data.map { ChartData(date: $0.date, value: $0.proteins) },
-                    color: .blue,
-                    icon: "drop.fill"
-                )
-                
-                // Fats Chart
-                ChartCard(
-                    title: "Fats".localized,
-                    data: data.map { ChartData(date: $0.date, value: $0.fats) },
-                    color: .yellow,
-                    icon: "circle.fill"
-                )
-                
-                // Calories Chart
-                ChartCard(
-                    title: "Calories".localized,
-                    data: data.map { ChartData(date: $0.date, value: $0.calories) },
-                    color: .red,
-                    icon: "bolt.fill"
-                )
-                
-                Spacer(minLength: 100)
-            }
-            .padding()
-        }
+        .padding(.horizontal, 20)
     }
 }
 
@@ -520,16 +437,30 @@ struct ChartCard: View {
     let title: String
     let data: [ChartData]
     let color: Color
-    let icon: String
+    let emoji: String
+    
+    private var xAxisValues: [Date] {
+        // Уменьшаем количество подписей на оси дат для лучшей читаемости
+        let sortedData = data.sorted { $0.date < $1.date }
+        let count = sortedData.count
+        
+        if count <= 7 {
+            return sortedData.map { $0.date }
+        } else if count <= 14 {
+            return stride(from: 0, to: count, by: 2).map { sortedData[$0].date }
+        } else {
+            return stride(from: 0, to: count, by: count/5).map { sortedData[$0].date }
+        }
+    }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Image(systemName: icon)
-                    .foregroundColor(color)
-                    .font(.title3)
+                Text(emoji)
+                    .font(.title)
                 Text(title)
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.semibold)
                     .foregroundColor(.primary)
                 Spacer()
             }
@@ -541,7 +472,7 @@ struct ChartCard: View {
                         y: .value("Value", item.value)
                     )
                     .foregroundStyle(color)
-                    .lineStyle(StrokeStyle(lineWidth: 3))
+                    .lineStyle(StrokeStyle(lineWidth: 4))
                     
                     AreaMark(
                         x: .value("Date", item.date),
@@ -549,27 +480,27 @@ struct ChartCard: View {
                     )
                     .foregroundStyle(color.opacity(0.1))
                 }
-                .frame(height: 200)
+                .frame(height: 240)
                 .chartXAxis {
-                    AxisMarks(values: .stride(by: .day)) { value in
+                    AxisMarks(values: .automatic(desiredCount: 4)) { value in
                         AxisGridLine()
                         AxisValueLabel(format: .dateTime.day().month())
                     }
                 }
             } else {
                 Text("Not enough data for chart".localized)
-                    .font(.caption)
+                    .font(.body)
                     .foregroundColor(.secondary)
-                    .frame(height: 200)
+                    .frame(height: 240)
                     .frame(maxWidth: .infinity)
                     .background(Color(.systemGray6))
-                    .cornerRadius(8)
+                    .cornerRadius(12)
             }
         }
-        .padding()
+        .padding(20)
         .background(Color(.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(20)
+        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
         .frame(maxWidth: .infinity)
     }
 }
@@ -578,34 +509,36 @@ struct DailyDataCard: View {
     let data: HealthDataManager.DailyHealthData
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 20) {
             // Date Header
             HStack {
                 Text(data.date, style: .date)
-                    .font(.headline)
+                    .font(.title2)
+                    .fontWeight(.semibold)
                     .foregroundColor(.primary)
                 Spacer()
                 Image(systemName: "calendar.circle.fill")
+                    .font(.title2)
                     .foregroundColor(.blue)
             }
             
-            // Data Grid
+            // Data Grid with emojis
             LazyVGrid(columns: [
                 GridItem(.flexible()),
                 GridItem(.flexible())
-            ], spacing: 12) {
-                DataItem(title: "Steps".localized, value: "\(Int(data.steps))", icon: "figure.walk", color: .green)
-                DataItem(title: "Active Energy".localized, value: "\(Int(data.activeEnergy)) kcal", icon: "flame.fill", color: .orange)
-                DataItem(title: "Carbs".localized, value: String(format: "%.1f g", data.carbs), icon: "leaf.fill", color: .green)
-                DataItem(title: "Proteins".localized, value: String(format: "%.1f g", data.proteins), icon: "drop.fill", color: .blue)
-                DataItem(title: "Fats".localized, value: String(format: "%.1f g", data.fats), icon: "circle.fill", color: .yellow)
-                DataItem(title: "Calories".localized, value: "\(Int(data.calories)) kcal", icon: "bolt.fill", color: .red)
+            ], spacing: 16) {
+                DataItem(title: "Steps".localized, value: "\(Int(data.steps))", emoji: "🚶", color: .green)
+                DataItem(title: "Active Energy".localized, value: "\(Int(data.activeEnergy)) kcal", emoji: "🔥", color: .orange)
+                DataItem(title: "Carbs".localized, value: String(format: "%.1f g", data.carbs), emoji: "🍩", color: .green)
+                DataItem(title: "Proteins".localized, value: String(format: "%.1f g", data.proteins), emoji: "🍗", color: .blue)
+                DataItem(title: "Fats".localized, value: String(format: "%.1f g", data.fats), emoji: "🧈", color: .yellow)
+                DataItem(title: "Calories".localized, value: "\(Int(data.calories)) kcal", emoji: "🍽️", color: .red)
             }
         }
-        .padding()
+        .padding(24)
         .background(Color(.systemBackground))
-        .cornerRadius(16)
-        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+        .cornerRadius(20)
+        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
         .frame(maxWidth: .infinity)
     }
 }
@@ -613,35 +546,36 @@ struct DailyDataCard: View {
 struct DataItem: View {
     let title: String
     let value: String
-    let icon: String
+    let emoji: String
     let color: Color
     
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 10) {
             HStack {
-                Image(systemName: icon)
-                    .foregroundColor(color)
-                    .font(.title3)
+                Text(emoji)
+                    .font(.title)
                 Spacer()
             }
             
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(alignment: .leading, spacing: 6) {
                 Text(title)
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundColor(.secondary)
                 Text(value)
-                    .font(.headline)
+                    .font(.title3)
+                    .fontWeight(.semibold)
                     .foregroundColor(.primary)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding()
+        .padding(16)
         .background(Color(.systemGray6))
-        .cornerRadius(12)
+        .cornerRadius(16)
         .frame(maxWidth: .infinity)
+        .frame(height: 110)
     }
 }
 
 #Preview {
     HealthDataView()
-} 
+}

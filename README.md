@@ -10,7 +10,7 @@ This iOS app collects deduplicated daily statistics from Apple Health for steps,
 
 ## Requirements
 - Xcode 15+
-- iOS 16+
+- iOS 17.0+
 - Apple Health permissions (requested on first launch)
 
 ## Setup & Run

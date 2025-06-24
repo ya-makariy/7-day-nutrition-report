@@ -32,6 +32,10 @@ final class HealthDataViewModel: ObservableObject {
     
     func exportCSV() {
         guard !dailyData.isEmpty else { return }
+        
+        // Очищаем старые CSV файлы
+        cleanupOldCSVFiles()
+        
         let header = "Date,Steps,Active Energy (kcal),Carbs (g),Proteins (g),Fats (g),Calories (kcal)\n"
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -39,12 +43,45 @@ final class HealthDataViewModel: ObservableObject {
             "\(formatter.string(from: data.date)),\(Int(data.steps)),\(Int(data.activeEnergy)),\(String(format: "%.1f", data.carbs)),\(String(format: "%.1f", data.proteins)),\(String(format: "%.1f", data.fats)),\(Int(data.calories))"
         }
         let csvString = header + rows.joined(separator: "\n")
+        
         do {
-            let url = FileManager.default.temporaryDirectory.appendingPathComponent("HealthStats.csv")
+            // Используем Documents директорию вместо временной
+            let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let fileName = "HealthStats_\(Date().timeIntervalSince1970).csv"
+            var url = documentsPath.appendingPathComponent(fileName)
+            
+            // Записываем файл
             try csvString.write(to: url, atomically: true, encoding: .utf8)
+            
+            // Устанавливаем правильные атрибуты файла
+            var resourceValues = URLResourceValues()
+            resourceValues.isExcludedFromBackup = true
+            try url.setResourceValues(resourceValues)
+            
             self.csvURL = url
         } catch {
             self.error = "Failed to export CSV: \(error.localizedDescription)"
+        }
+    }
+    
+    private func cleanupOldCSVFiles() {
+        do {
+            let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let contents = try FileManager.default.contentsOfDirectory(at: documentsPath, includingPropertiesForKeys: nil)
+            
+            // Удаляем старые CSV файлы (старше 1 часа)
+            let oneHourAgo = Date().addingTimeInterval(-3600)
+            for url in contents {
+                if url.pathExtension == "csv" && url.lastPathComponent.hasPrefix("HealthStats_") {
+                    let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+                    if let creationDate = attributes[.creationDate] as? Date, creationDate < oneHourAgo {
+                        try FileManager.default.removeItem(at: url)
+                    }
+                }
+            }
+        } catch {
+            // Игнорируем ошибки очистки
+            print("Failed to cleanup old CSV files: \(error)")
         }
     }
 } 
